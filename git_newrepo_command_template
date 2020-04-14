@@ -1,0 +1,33 @@
+# Template of git_newrepo shell command. I use it always in python virtualenvironment setting
+# so the script is written this way, so be sure to edit corresponding script lines  in a way
+# to work in your host environment...
+# $1 - repository name / config command (repository name is selected by user from keyboard)
+# $2 - $3   no order is important
+#     results - Gitea create repo json response data
+#     initscript - create init_new_repository.sh to clone repository
+#     config - all Gitea create parameters can be changed from those set in create_repo_default_params.py
+
+#!/bin/bash
+WORKING_DIR=$(pwd)
+echo $WORKING_DIR
+SCRIPT_DIR=where_the-command_create_repository.py-exist
+cd $SCRIPT_DIR
+source bin/activate
+cd src
+python command_create_repository.py $1 $2 $3 $4
+sleep 1
+
+# Continue only if exist initscript file - again change according existing environment
+file="$SCRIPT_DIR/src/init_new_repository.sh"
+if [ ! -f "$file" ]
+then
+	exit 1
+fi
+
+echo "-- Standardni inicializace repo adresare ---"
+mv $SCRIPT_DIR/src/init_new_repository.sh $WORKING_DIR/init_new_repository.sh
+chmod 777 $WORKING_DIR/init_new_repository.sh
+cd $WORKING_DIR
+sleep 1
+./init_new_repository.sh
+rm init_new_repository.sh

@@ -133,3 +133,4 @@ dmypy.json
 /gitea_url_params.py
 /initialize_new_repository.sh
 /lobogit_newrepo
+/example.txt

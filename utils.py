@@ -32,13 +32,21 @@ def create_gitea_url(protocol, host, port, base_api, user_api):
     :param user_api:
     :return:
     """
-    url_string = "{0}://{1}:{2}{3}{4}".format(
-        protocol,
-        host,
-        port,
-        base_api,
-        user_api
-    )
+    if port:
+        url_string = "{0}://{1}:{2}{3}{4}".format(
+            protocol,
+            host,
+            port,
+            base_api,
+            user_api
+        )
+    else:
+        url_string = "{0}://{1}{2}{3}".format(
+            protocol,
+            host,
+            base_api,
+            user_api
+        )
     return url_string
 
 

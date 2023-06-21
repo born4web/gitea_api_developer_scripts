@@ -14,7 +14,7 @@ import gitea_url_params
 from tokens import TOKENS
 from create_repo_default_params import create_repo_default_params
 
-token = TOKENS[1]
+token = TOKENS[2]
 
 headers = {
     "Authorization": "token {}".format(token),
@@ -86,6 +86,7 @@ if __name__ == "__main__":
 
     # Create repo initialize script if demanded
     response_json_data = r.json()
+    print(response_json_data)
     if repo_init_script:
         print("\n====================================================")
         print("========== Creating repository init script ==========")
